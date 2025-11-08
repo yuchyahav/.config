@@ -32,14 +32,10 @@ opt.foldlevel = 99
 opt.foldmethod = "indent"
 opt.foldcolumn = "0"
 opt.foldopen = ""
-opt.foldlevelstart = 0
+opt.foldlevelstart = 99
 
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
-vim.api.nvim_set_hl(0, "NonText", { bg = "NONE" })
-vim.api.nvim_set_hl(0, "Folded", { bg = "none", bold = true })
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 
 vim.g.netrw_liststyle = 1
 vim.g.netrw_sort_by = "size"
@@ -48,15 +44,30 @@ opt.background = "dark"
 opt.laststatus = 2
 
 vim.pack.add({
-	{ src = "https://github.com/vague-theme/vague.nvim" },
+	{ src = "https://github.com/stevearc/conform.nvim" },
 })
 
-require("vague").setup({
-    italic = false,
-    transparent = true,
+require("conform").setup({
+	formatters_by_ft = {
+		cpp = { "clang_format" },
+		c = { "clang_format" },
+		sh = { "shfmt" },
+	},
+
+	formatters = {
+		clang_format = {
+			command = "clang-format",
+			args = { "--style=file", "-fallback-style=Google" },
+		},
+	},
 })
 
-vim.cmd.colorscheme("vague")
+vim.cmd.colorscheme("desert")
+
+vim.api.nvim_set_hl(0, "NonText", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "Folded", { bg = "none", bold = true })
+vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#343434", bold = true })
+-- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 
 local map = vim.keymap.set
 vim.g.mapleader = " "
@@ -67,10 +78,11 @@ map("n", "<leader>q", "<Cmd>:quit<CR>")
 map("n", "<leader>Q", "<Cmd>:wqa<CR>")
 map({ "n", "v", "x" }, ";", ":")
 map({ "n", "v", "x" }, ":", ";")
+map("n", "<leader>cf", function() require("conform").format({ lsp_format = false }) end)
 
 -- harpoon replacement
 map("n", "<leader>a", function() vim.cmd("argadd %") vim.cmd("argdedup") end)
-map("n", "<leader>e", function() vim.cmd.args() end)
+map("n", "<leader>l", function() vim.cmd.args() end)
 map("n", "<C-h>", function() vim.cmd("silent! 1argument") end)
 map("n", "<C-j>", function() vim.cmd("silent! 2argument") end)
 map("n", "<C-k>", function() vim.cmd("silent! 3argument") end)

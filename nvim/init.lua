@@ -35,7 +35,7 @@ opt.foldlevel = 99
 opt.foldmethod = "indent"
 opt.foldcolumn = "0"
 opt.foldopen = ""
-opt.foldlevelstart = 0
+opt.foldlevelstart = 99
 
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
@@ -66,11 +66,10 @@ local function color_my_pencils(color)
 	vim.cmd.colorscheme(color)
 
 	vim.api.nvim_set_hl(0, "Folded", { fg = "#6e6a86", bg = "none", bold = true })
+    vim.cmd([[highlight! link TelescopeNormal   Normal]])
+    vim.cmd([[highlight! link TelescopeBorder   FloatBorder]])
 
 	if color == "rose-pine-moon" and color.transparency == false then
-		vim.cmd([[highlight! link TelescopeNormal   Normal]])
-		vim.cmd([[highlight! link TelescopeBorder   FloatBorder]])
-
 		vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
 		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000" })
@@ -78,26 +77,6 @@ local function color_my_pencils(color)
 	end
 
 	vim.g.syntax_on = true
-end
-
-local function toggle_syntax()
-	if vim.g.syntax_on then
-		vim.cmd("TSDisable highlight")
-		vim.cmd("syntax off")
-
-		for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-			vim.api.nvim_set_hl(0, group, {})
-		end
-
-		vim.g.syntax_on = false
-		print("syntax off")
-	else
-		vim.cmd("syntax on")
-		vim.cmd("TSEnable highlight")
-
-		color_my_pencils()
-		print("syntax on")
-	end
 end
 
 -- colors
@@ -133,7 +112,32 @@ require("vague").setup({
 	italic = false,
 	transparent = true,
 })
-color_my_pencils("vague")
+
+MY_COLOR = "vague"
+-- MY_COLOR = "desert"
+-- MY_COLOR = "rose-pine-moon"
+color_my_pencils(MY_COLOR)
+
+local function toggle_syntax()
+	if vim.g.syntax_on then
+		vim.cmd("TSDisable highlight")
+		vim.cmd("syntax off")
+
+		for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+			vim.api.nvim_set_hl(0, group, {})
+		end
+
+		vim.g.syntax_on = false
+		print("syntax off")
+	else
+		vim.cmd("syntax on")
+		vim.cmd("TSEnable highlight")
+
+		color_my_pencils(MY_COLOR)
+		print("syntax on")
+	end
+end
+
 
 require("mason").setup({ ui = { border = "single" } })
 require("nvim-treesitter").setup()

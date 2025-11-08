@@ -43,7 +43,7 @@ local vague = {
 	},
 
 	ansi = {
-		"#606079",
+		"#141415",
 		"#e08398",
 		"#99b782",
 		"#f5cb96",
@@ -91,6 +91,25 @@ local rose_pine = {
 	},
 }
 
+config.colors = vague
+
+if config.colors == vague then
+	-- config.window_background_opacity = 0.6
+	-- config.macos_window_background_blur = 15
+	config.window_background_opacity = 1
+	config.macos_window_background_blur = 100
+else
+	config.window_background_opacity = 0.80
+    config.macos_window_background_blur = 90
+end
+
+config.window_padding = {
+	left = 0,
+	right = 0,
+	top = 5,
+	bottom = 0,
+}
+
 config.keys = {
 	{
 		key = "n",
@@ -100,25 +119,5 @@ config.keys = {
 }
 
 config.native_macos_fullscreen_mode = true
-
-config.colors = vague
-
--- config.window_background_opacity = 1
--- config.macos_window_background_blur = 100
-
-if config.colors == vague then
-    config.window_background_opacity = 0.70
-    config.macos_window_background_blur = 30
-else
-    config.window_background_opacity = 0.80
-    config.macos_window_background_blur = 90
-end
-
-config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 5,
-  bottom = 0,
-}
 
 return config
