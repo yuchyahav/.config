@@ -236,7 +236,7 @@ run = "move-node-to-workspace B"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = "move-node-to-workspace F"
+run = "move-node-to-workspace Z"
 
 [[on-window-detected]]
 if.app-id = 'ch.protonvpn.mac'
@@ -249,3 +249,7 @@ run = "move-node-to-workspace N"
 [[on-window-detected]]
 if.app-id = 'com.utmapp.UTM'
 run = "move-node-to-workspace U"
+
+[[on-window-detected]]
+if.app-id = 'org.yanex.marta'
+run = "move-node-to-workspace F"

@@ -1,16 +1,12 @@
 local wezterm = require("wezterm")
-
 local config = wezterm.config_builder()
 
--- config.font = wezterm.font("ComicShannsMono Nerd Font Mono")
-config.font = wezterm.font("Comic Code", { weight = "Regular" })
+-- config.font = wezterm.font("Comic Code", { weight = "Regular" })
+config.font = wezterm.font("Iosevka Fixed")
 -- config.font = wezterm.font("FiraMono Nerd Font Mono")
--- config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
 
--- config.font = wezterm.font("Unifont")
 config.cell_width = 1
-
-config.font_size = 29.5
+config.font_size = 26
 config.line_height = 1
 
 config.enable_tab_bar = false
@@ -54,54 +50,46 @@ local vague = {
 	},
 }
 
-local rose_pine = {
-	foreground = "#e0def4",
-	background = "#000000",
+local gruber_darker = {
+	foreground = "#E4E4E4",
+	background = "#181818",
 
-	cursor_bg = "#e0def4",
-	cursor_fg = "#000000",
-	cursor_border = "#e0def4",
+	cursor_bg = "#FFDD33",
+	cursor_fg = "#181818",
+	cursor_border = "#FFDD33",
 
-	selection_fg = "#e0def4",
-	selection_bg = "#403d52",
+	selection_fg = "#F4F4FF",
+	selection_bg = "#453D41",
 
-	scrollbar_thumb = "#26233a",
-	split = "#403d52",
+	scrollbar_thumb = "#52494E",
+	split = "#52494E",
 
 	ansi = {
-		"#000000",
-		"#eb6f92",
-		"#3e8fb0",
-		"#e0c797",
-		"#b0c6d5",
-		"#c4a7e7",
-		"#ebbcba",
-		"#e0def4",
+		"#181818",
+		"#F43841",
+		"#73D936",
+		"#FFDD33",
+		"#96A6C8",
+		"#9E95C7",
+		"#95A99F",
+		"#F5F5F5",
 	},
 
 	brights = {
-		"#000000",
-		"#eb6f92",
-		"#3e8fb0",
-		"#e0c797",
-		"#b0c6d5",
-		"#c4a7e7",
-		"#ebbcba",
-		"#e0def4",
+		"#52494E",
+		"#F43841",
+		"#73D936",
+		"#FFDD33",
+		"#96A6C8",
+		"#9E95C7",
+		"#95A99F",
+		"#FFFFFF",
 	},
 }
 
-config.colors = vague
-
-if config.colors == vague then
-	-- config.window_background_opacity = 0.6
-	-- config.macos_window_background_blur = 15
-	config.window_background_opacity = 1
-	config.macos_window_background_blur = 100
-else
-	config.window_background_opacity = 0.80
-    config.macos_window_background_blur = 90
-end
+config.colors = gruber_darker
+config.window_background_opacity = 1
+config.macos_window_background_blur = 100
 
 config.window_padding = {
 	left = 0,
